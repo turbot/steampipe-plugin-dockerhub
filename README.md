@@ -33,7 +33,7 @@ connection "dockerhub" {
 }
 ```
 
-or using 2FA code:
+or through 2FA code:
 
 ```hcl
 connection "dockerhub" {

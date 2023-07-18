@@ -54,11 +54,11 @@ steampipe plugin install dockerhub
 
 ### Credentials
 
-| Item        | Description                                                                                                                                                                                            |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- |
-| Credentials | You will require Docker username and password.                                                                                                                                                         |
-| Permissions | NA                                                                                                                                                                                                     |
-| Radius      | Each connection represents one Docker Hub user.                                                                                                                                                        |     |
+| Item | Description                                                                                                                                                                                              |
+| ---- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Credentials | You will require Docker username and password.                                                                                               |
+| Permissions | NA                                                              |
+| Radius | Each connection represents one Docker Hub user. |                                                                    |
 | Resolution  | 1. Credentials explicitly set in a steampipe config file (`~/.steampipe/config/dockerhub.spc`).<br />2. Credentials specified in environment variables, e.g., `DOCKER_USERNAME` and `DOCKER_PASSWORD`. |
 
 ### Configuration

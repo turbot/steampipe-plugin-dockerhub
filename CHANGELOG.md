@@ -3,7 +3,7 @@
 _What's new?_
 
 - New tables added
-  - [dockerhub_repository](https://hub.steampipe.io/plugins/turbot/namecheap/tables/dockerhub_repository)
-  - [dockerhub_tag](https://hub.steampipe.io/plugins/turbot/namecheap/tables/dockerhub_tag)
-  - [dockerhub_token](https://hub.steampipe.io/plugins/turbot/namecheap/tables/dockerhub_token)
-  - [dockerhub_user](https://hub.steampipe.io/plugins/turbot/namecheap/tables/dockerhub_user)
+  - [dockerhub_repository](https://hub.steampipe.io/plugins/turbot/dockerhub/tables/dockerhub_repository)
+  - [dockerhub_tag](https://hub.steampipe.io/plugins/turbot/dockerhub/tables/dockerhub_tag)
+  - [dockerhub_token](https://hub.steampipe.io/plugins/turbot/dockerhub/tables/dockerhub_token)
+  - [dockerhub_user](https://hub.steampipe.io/plugins/turbot/dockerhub/tables/dockerhub_user)
