@@ -33,7 +33,7 @@ connection "dockerhub" {
 }
 ```
 
-or through 2FA code:
+Or through 2FA code:
 
 ```hcl
 connection "dockerhub" {
@@ -46,9 +46,9 @@ connection "dockerhub" {
 }
 ```
 
-or through environment variables:
+Or through environment variables:
 
-```shell
+```sh
 export DOCKER_USERNAME=turbot
 export DOCKER_PASSWORD=turbot@123
 ```
@@ -90,27 +90,27 @@ Prerequisites:
 
 Clone:
 
-```shell
+```sh
 git clone https://github.com/turbot/steampipe-plugin-dockerhub.git
 cd steampipe-plugin-dockerhub
 ```
 
 Build, which automatically installs the new version to your `~/.steampipe/plugins` directory:
 
-```shell
+```
 make
 ```
 
 Configure the plugin:
 
-```shell
+```
 cp config/* ~/.steampipe/config
 vi ~/.steampipe/config/dockerhub.spc
 ```
 
 Try it!
 
-```shell
+```
 steampipe query
 > .inspect dockerhub
 ```

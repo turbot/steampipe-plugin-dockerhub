@@ -48,7 +48,7 @@ from
 
 Download and install the latest Docker Hub plugin:
 
-```shell
+```sh
 steampipe plugin install dockerhub
 ```
 
@@ -56,7 +56,7 @@ steampipe plugin install dockerhub
 
 | Item | Description                                                                                                                                                                                              |
 | ---- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Credentials | You will require Docker username and password.                                                                                               |
+| Credentials | You will require the Docker `username`` and `password``.                                                                                               |
 | Permissions | NA                                                              |
 | Radius | Each connection represents one Docker Hub user. |                                                                    |
 | Resolution  | 1. Credentials explicitly set in a steampipe config file (`~/.steampipe/config/dockerhub.spc`).<br />2. Credentials specified in environment variables, e.g., `DOCKER_USERNAME` and `DOCKER_PASSWORD`. |
@@ -86,7 +86,7 @@ connection "dockerhub" {
 
 Alternatively, you can also use the standard Docker Hub environment variables to configure your credentials **only if other arguments (`username`, `password`) are not specified** in the connection:
 
-```shell
+```sh
 export DOCKER_USERNAME=turbot
 export DOCKER_PASSWORD=turbot@123
 ```

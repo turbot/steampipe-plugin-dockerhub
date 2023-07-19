@@ -38,7 +38,7 @@ where
   private_repositories is null;
 ```
 
-### List users who are from the turbot company
+### List users who are from a particular company
 
 ```sql
 select
@@ -55,7 +55,7 @@ where
   company = 'turbot';
 ```
 
-### List users who are joined in the last 30 days
+### List users who have joined in the last 30 days
 
 ```sql
 select
