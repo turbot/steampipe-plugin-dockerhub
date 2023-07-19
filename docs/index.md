@@ -2,7 +2,7 @@
 organization: Turbot
 category: ["software development"]
 icon_url: "/images/plugins/turbot/dockerhub.svg"
-brand_color: ""
+brand_color: "#096BD4"
 display_name: "Docker Hub"
 short_name: "dockerhub"
 description: "Steampipe plugin for querying Docker Hub Repositories, Tags and other resources."
