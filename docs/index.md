@@ -14,7 +14,7 @@ og_image: "/images/plugins/turbot/dockerhub-social-graphic.png"
 
 [Docker Hub](https://hub.docker.com/) is a cloud-based repository and distribution service provided by Docker that allows developers to store and share container images.
 
-[Steampipe](https://steampipe.io/) is an open source CLI for querying cloud APIs using SQL from [Turbot](https://turbot.com/)
+[Steampipe](https://steampipe.io) is an open source CLI to instantly query cloud APIs using SQL.
 
 List your Docker Hub Repositories:
 
@@ -56,9 +56,9 @@ steampipe plugin install dockerhub
 
 | Item | Description                                                                                                                                                                                              |
 | ---- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Credentials | You will require the Docker `username`` and `password``.                                                                                               |
+| Credentials | Docker Hub plugin requires `username` and `password`.                                                                                               |
 | Permissions | NA                                                              |
-| Radius | Each connection represents one Docker Hub user. |                                                                    |
+| Radius      | Each connection represents one Docker Hub user. |                                                                    |
 | Resolution  | 1. Credentials explicitly set in a steampipe config file (`~/.steampipe/config/dockerhub.spc`).<br />2. Credentials specified in environment variables, e.g., `DOCKER_HUB_USERNAME` and `DOCKER_HUB_PASSWORD`. |
 
 ### Configuration
@@ -84,7 +84,7 @@ connection "dockerhub" {
 }
 ```
 
-Alternatively, you can also use the standard Docker Hub environment variables to configure your credentials **only if other arguments (`username`, `password`) are not specified** in the connection:
+Alternatively, you can also use the standard Docker Hub environment variables to configure your credentials **only if other arguments (`username` and `password`) are not specified** in the connection:
 
 ```sh
 export DOCKER_HUB_USERNAME=turbot

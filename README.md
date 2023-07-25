@@ -33,19 +33,6 @@ connection "dockerhub" {
 }
 ```
 
-Or through 2FA code:
-
-```hcl
-connection "dockerhub" {
-  plugin = "dockerhub"
-
-  # Authentication information
-  username        = "turbot"
-  password        = "turbot@123"
-  two_factor_code = "123456"
-}
-```
-
 Or through environment variables:
 
 ```sh

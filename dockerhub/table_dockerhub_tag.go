@@ -38,7 +38,7 @@ func tableDockerHubTag(_ context.Context) *plugin.Table {
 			{
 				Name:        "last_updater_user_name",
 				Type:        proto.ColumnType_STRING,
-				Description: "Username of the last updater of the tag.",
+				Description: "Username by whom the tag was last updated.",
 			},
 			{
 				Name:        "images",
