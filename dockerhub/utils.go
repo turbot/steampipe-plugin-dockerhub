@@ -22,8 +22,8 @@ var GetNewClientCached = plugin.HydrateFunc(GetNewClientUncached).Memoize()
 
 func GetNewClientUncached(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (any, error) {
 	// Default to using env vars (#2)
-	username := os.Getenv("DOCKER_USERNAME")
-	password := os.Getenv("DOCKER_PASSWORD")
+	username := os.Getenv("DOCKER_HUB_USERNAME")
+	password := os.Getenv("DOCKER_HUB_PASSWORD")
 	twoFactorCode := ""
 
 	// But prefer the config (#1)

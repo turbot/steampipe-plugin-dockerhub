@@ -49,8 +49,8 @@ connection "dockerhub" {
 or through environment variables:
 
 ```shell
-export DOCKER_USERNAME=turbot
-export DOCKER_PASSWORD=turbot@123
+export DOCKER_HUB_USERNAME=turbot
+export DOCKER_HUB_PASSWORD=turbot@123
 ```
 
 Run steampipe:
