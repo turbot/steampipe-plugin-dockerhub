@@ -34,7 +34,7 @@ where
   name like 'souravthe/test%';
 ```
 
-### List tags which are never pulled
+### List tags with no pulls or downloads
 
 ```sql
 select
@@ -66,7 +66,7 @@ where
   status <> 'active';
 ```
 
-### List tags which are last updated by john
+### List tags which are last updated by a particular user
 
 ```sql
 select
@@ -99,5 +99,5 @@ from
   dockerhub_tag,
   jsonb_array_elements(images) as i
 where
-  name like 'souravthe/test:latest';;
+  name like 'souravthe/test:latest';
 ```

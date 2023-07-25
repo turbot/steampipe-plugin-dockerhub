@@ -17,7 +17,7 @@ from
   dockerhub_repository;
 ```
 
-### List the private repositories
+### List private repositories
 
 ```sql
 select
@@ -32,7 +32,7 @@ where
   is_private;
 ```
 
-### List the repositories which are never pulled
+### List repositories with no pulls or downloads
 
 ```sql
 select
@@ -47,7 +47,7 @@ where
   pull_count is null;
 ```
 
-### List the repositories which are updated 90 days ago
+### List repositories that have not received any stars or likes
 
 ```sql
 select
@@ -59,5 +59,20 @@ select
 from
   dockerhub_repository
 where
-  last_updated < now() - interval '90' day;
+  star_count is null;
+```
+
+### List repositories which have not been updated in the last 7 days
+
+```sql
+select
+  name,
+  pull_count,
+  star_count,
+  is_private,
+  last_updated
+from
+  dockerhub_repository
+where
+  last_updated > now() - interval '7' day;
 ```

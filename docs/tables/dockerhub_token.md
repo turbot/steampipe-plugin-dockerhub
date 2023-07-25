@@ -36,7 +36,7 @@ where
   not is_active;
 ```
 
-### List tokens which are never used
+### List tokens which have never been used
 
 ```sql
 select
@@ -53,7 +53,7 @@ where
   last_used is null;
 ```
 
-### List tokens which are generated manually
+### List manually generated tokens
 
 ```sql
 select

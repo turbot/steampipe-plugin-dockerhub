@@ -2,7 +2,7 @@
 organization: Turbot
 category: ["software development"]
 icon_url: "/images/plugins/turbot/dockerhub.svg"
-brand_color: ""
+brand_color: "#096BD4"
 display_name: "Docker Hub"
 short_name: "dockerhub"
 description: "Steampipe plugin for querying Docker Hub Repositories, Tags and other resources."
@@ -48,17 +48,17 @@ from
 
 Download and install the latest Docker Hub plugin:
 
-```shell
+```sh
 steampipe plugin install dockerhub
 ```
 
 ### Credentials
 
-| Item        | Description                                                                                                                                                                                                    |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| Credentials | You will require Docker username and password.                                                                                                                                                                 |
-| Permissions | NA                                                                                                                                                                                                             |
-| Radius      | Each connection represents one Docker Hub user.                                                                                                                                                                |     |
+| Item | Description                                                                                                                                                                                              |
+| ---- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Credentials | You will require the Docker `username`` and `password``.                                                                                               |
+| Permissions | NA                                                              |
+| Radius | Each connection represents one Docker Hub user. |                                                                    |
 | Resolution  | 1. Credentials explicitly set in a steampipe config file (`~/.steampipe/config/dockerhub.spc`).<br />2. Credentials specified in environment variables, e.g., `DOCKER_HUB_USERNAME` and `DOCKER_HUB_PASSWORD`. |
 
 ### Configuration
@@ -86,7 +86,7 @@ connection "dockerhub" {
 
 Alternatively, you can also use the standard Docker Hub environment variables to configure your credentials **only if other arguments (`username`, `password`) are not specified** in the connection:
 
-```shell
+```sh
 export DOCKER_HUB_USERNAME=turbot
 export DOCKER_HUB_PASSWORD=turbot@123
 ```
