@@ -5,7 +5,7 @@ icon_url: "/images/plugins/turbot/dockerhub.svg"
 brand_color: "#096BD4"
 display_name: "Docker Hub"
 short_name: "dockerhub"
-description: "Steampipe plugin for querying Docker Hub Repositories, Tags and other resources."
+description: "Steampipe plugin for querying Docker Hub repositories, tags and other resources."
 og_description: Query Docker Hub with SQL! Open source CLI. No DB required.
 og_image: "/images/plugins/turbot/dockerhub-social-graphic.png"
 ---

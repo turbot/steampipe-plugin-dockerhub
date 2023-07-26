@@ -45,18 +45,18 @@ func GetNewClientUncached(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 
 	client, err := hub.NewClient(hub.WithHubAccount(username), hub.WithPassword(password))
 	if err != nil {
-		return err, nil
+		return nil, err
 	}
 	token, _, err := client.Login(username, password, func() (string, error) {
 		return twoFactorCode, nil
 	})
 	if err != nil {
-		return err, nil
+		return nil, err
 	}
 
 	hubclient, err := hub.NewClient(hub.WithHubToken(token))
 	if err != nil {
-		return err, nil
+		return nil, err
 	}
 
 	return hubclient, nil
