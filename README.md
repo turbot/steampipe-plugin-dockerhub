@@ -6,7 +6,7 @@ Use SQL to instantly query Docker Hub Repositories, Tags, Tokens and more. Open 
 
 - **[Get started ->](https://hub.steampipe.io/plugins/turbot/dockerhub)**
 - Documentation: [Table definitions & examples](https://hub.steampipe.io/plugins/turbot/dockerhub/tables)
-- Community: [Slack Channel](https://steampipe.io/community/join)
+- Community: [Join #steampipe on Slack →](https://turbot.com/community/join)
 - Get involved: [Issues](https://github.com/turbot/steampipe-plugin-dockerhub/issues)
 
 ## Quick start
