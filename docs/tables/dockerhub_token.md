@@ -16,7 +16,20 @@ The `dockerhub_token` table provides insights into DockerHub Tokens within Docke
 ### Basic info
 Explore which DockerHub tokens are active and when they were created. This can be useful for auditing purposes, to track user activity and ensure security compliance.
 
-```sql
+```sql+postgres
+select
+  uuid,
+  is_active,
+  generated_by,
+  creator_ua,
+  creator_ip,
+  created_at,
+  client_id
+from
+  dockerhub_token;
+```
+
+```sql+sqlite
 select
   uuid,
   is_active,
@@ -32,7 +45,7 @@ from
 ### List inactive tokens
 Discover the segments that are associated with inactive tokens in DockerHub. This can be beneficial in identifying potential security risks and maintaining optimal system performance.
 
-```sql
+```sql+postgres
 select
   uuid,
   is_active,
@@ -47,10 +60,40 @@ where
   not is_active;
 ```
 
+```sql+sqlite
+select
+  uuid,
+  is_active,
+  generated_by,
+  creator_ua,
+  creator_ip,
+  created_at,
+  client_id
+from
+  dockerhub_token
+where
+  is_active = 0;
+```
+
 ### List tokens which have never been used
 Identify unused tokens within your DockerHub setup to assess potential security risks or inefficiencies. This helps in maintaining a clean, secure, and efficient environment by removing or updating unused tokens.
 
-```sql
+```sql+postgres
+select
+  uuid,
+  is_active,
+  generated_by,
+  creator_ua,
+  creator_ip,
+  created_at,
+  client_id
+from
+  dockerhub_token
+where
+  last_used is null;
+```
+
+```sql+sqlite
 select
   uuid,
   is_active,
@@ -68,7 +111,22 @@ where
 ### List manually generated tokens
 Explore which tokens have been manually generated. This is beneficial in identifying potential security risks or anomalies related to token generation.
 
-```sql
+```sql+postgres
+select
+  uuid,
+  is_active,
+  generated_by,
+  creator_ua,
+  creator_ip,
+  created_at,
+  client_id
+from
+  dockerhub_token
+where
+  generated_by = 'manual';
+```
+
+```sql+sqlite
 select
   uuid,
   is_active,
@@ -86,7 +144,7 @@ where
 ### List tokens which are older than 90 days
 Determine the areas in which DockerHub tokens have remained active for more than 90 days. This can be useful for identifying potential security risks associated with outdated tokens.
 
-```sql
+```sql+postgres
 select
   uuid,
   is_active,
@@ -99,4 +157,19 @@ from
   dockerhub_token
 where
   created_at < now() - interval '90' day;
+```
+
+```sql+sqlite
+select
+  uuid,
+  is_active,
+  generated_by,
+  creator_ua,
+  creator_ip,
+  created_at,
+  client_id
+from
+  dockerhub_token
+where
+  created_at < datetime('now', '-90 day');
 ```

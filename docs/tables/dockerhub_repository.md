@@ -16,7 +16,18 @@ The `dockerhub_repository` table provides insights into repositories within Dock
 ### Basic info
 Explore the popularity and privacy settings of repositories on DockerHub. This query can help you identify popular repositories with high pull and star counts, and understand the balance between public and private repositories.
 
-```sql
+```sql+postgres
+select
+  name,
+  pull_count,
+  star_count,
+  is_private,
+  last_updated
+from
+  dockerhub_repository;
+```
+
+```sql+sqlite
 select
   name,
   pull_count,
@@ -30,7 +41,7 @@ from
 ### List private repositories
 Explore which DockerHub repositories are set as private to gain insights into the level of exposure and access. This is useful for auditing and understanding the privacy settings of your repositories.
 
-```sql
+```sql+postgres
 select
   name,
   pull_count,
@@ -43,10 +54,36 @@ where
   is_private;
 ```
 
+```sql+sqlite
+select
+  name,
+  pull_count,
+  star_count,
+  is_private,
+  last_updated
+from
+  dockerhub_repository
+where
+  is_private = 1;
+```
+
 ### List repositories with no pulls or downloads
 Explore which Docker repositories have not been pulled or downloaded. This can help identify unused or less-popular repositories, enabling you to better manage your resources and focus on active repositories.
 
-```sql
+```sql+postgres
+select
+  name,
+  pull_count,
+  star_count,
+  is_private,
+  last_updated
+from
+  dockerhub_repository
+where
+  pull_count is null;
+```
+
+```sql+sqlite
 select
   name,
   pull_count,
@@ -62,7 +99,20 @@ where
 ### List repositories that have not received any stars or likes
 Explore which repositories have not gained any popularity or recognition, helping you identify potential areas for improvement or promotion. This query can be useful in understanding which of your repositories may need more attention or enhancement to increase their visibility and user engagement.
 
-```sql
+```sql+postgres
+select
+  name,
+  pull_count,
+  star_count,
+  is_private,
+  last_updated
+from
+  dockerhub_repository
+where
+  star_count is null;
+```
+
+```sql+sqlite
 select
   name,
   pull_count,
@@ -78,7 +128,7 @@ where
 ### List repositories which have not been updated in the last 7 days
 Determine the areas in which repositories have remained inactive over the past week. This query is useful for identifying potentially outdated or unused repositories, aiding in the efficient management of resources.
 
-```sql
+```sql+postgres
 select
   name,
   pull_count,
@@ -89,4 +139,17 @@ from
   dockerhub_repository
 where
   last_updated > now() - interval '7' day;
+```
+
+```sql+sqlite
+select
+  name,
+  pull_count,
+  star_count,
+  is_private,
+  last_updated
+from
+  dockerhub_repository
+where
+  last_updated > datetime('now', '-7 day');
 ```

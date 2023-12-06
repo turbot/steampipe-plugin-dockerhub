@@ -16,7 +16,20 @@ The `dockerhub_user` table provides insights into user profiles within Docker Hu
 ### Basic info
 Gain insights into the profile details of DockerHub users, such as their company affiliation and location. This query is useful for understanding user demographics and their private repository usage.
 
-```sql
+```sql+postgres
+select
+  id,
+  name,
+  full_name,
+  company,
+  joined,
+  location,
+  private_repositories
+from
+  dockerhub_user;
+```
+
+```sql+sqlite
 select
   id,
   name,
@@ -32,7 +45,22 @@ from
 ### List users who do not have any private repositories
 Discover the segments of DockerHub users who have not created any private repositories. This is useful for understanding user behavior and identifying potential opportunities for promoting the use of private repositories.
 
-```sql
+```sql+postgres
+select
+  id,
+  name,
+  full_name,
+  company,
+  joined,
+  location,
+  private_repositories
+from
+  dockerhub_user
+where
+  private_repositories is null;
+```
+
+```sql+sqlite
 select
   id,
   name,
@@ -50,7 +78,22 @@ where
 ### List users who are from a particular company
 Explore which users are associated with a specific company. This can be particularly useful for gaining insights into the distribution of users across different companies.
 
-```sql
+```sql+postgres
+select
+  id,
+  name,
+  full_name,
+  company,
+  joined,
+  location,
+  private_repositories
+from
+  dockerhub_user
+where
+  company = 'turbot';
+```
+
+```sql+sqlite
 select
   id,
   name,
@@ -68,7 +111,7 @@ where
 ### List users who have joined in the last 30 days
 Identify the recent additions to your Dockerhub user base by pinpointing those who have joined within the past month. This allows you to keep track of your growing community and understand the pace of your user acquisition.
 
-```sql
+```sql+postgres
 select
   id,
   name,
@@ -83,10 +126,40 @@ where
   joined >= now() - interval '30' day;
 ```
 
+```sql+sqlite
+select
+  id,
+  name,
+  full_name,
+  company,
+  joined,
+  location,
+  private_repositories
+from
+  dockerhub_user
+where
+  joined >= datetime('now', '-30 day');
+```
+
 ### List users who are not part of any teams
 Discover the segments of users who have not joined any teams, providing insights into potential areas for team collaboration and resource allocation. This can be useful for understanding user engagement and optimizing team-based features.
 
-```sql
+```sql+postgres
+select
+  id,
+  name,
+  full_name,
+  company,
+  joined,
+  location,
+  private_repositories
+from
+  dockerhub_user
+where
+  teams is null;
+```
+
+```sql+sqlite
 select
   id,
   name,
