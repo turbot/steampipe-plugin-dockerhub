@@ -8,6 +8,7 @@ short_name: "dockerhub"
 description: "Steampipe plugin for querying Docker Hub repositories, tags and other resources."
 og_description: Query Docker Hub with SQL! Open source CLI. No DB required.
 og_image: "/images/plugins/turbot/dockerhub-social-graphic.png"
+engines: ["steampipe", "sqlite", "postgres", "export"]
 ---
 
 # Docker Hub + Steampipe
