@@ -8,13 +8,14 @@ short_name: "dockerhub"
 description: "Steampipe plugin for querying Docker Hub repositories, tags and other resources."
 og_description: Query Docker Hub with SQL! Open source CLI. No DB required.
 og_image: "/images/plugins/turbot/dockerhub-social-graphic.png"
+engines: ["steampipe", "sqlite", "postgres", "export"]
 ---
 
 # Docker Hub + Steampipe
 
 [Docker Hub](https://hub.docker.com/) is a cloud-based repository and distribution service provided by Docker that allows developers to store and share container images.
 
-[Steampipe](https://steampipe.io) is an open source CLI to instantly query cloud APIs using SQL.
+[Steampipe](https://steampipe.io) is an open-source zero-ETL engine to instantly query cloud APIs using SQL.
 
 List your Docker Hub Repositories:
 
@@ -91,7 +92,4 @@ export DOCKER_HUB_USERNAME=turbot
 export DOCKER_HUB_PASSWORD=turbot@123
 ```
 
-## Get involved
 
-- Open source: https://github.com/turbot/steampipe-plugin-dockerhub
-- Community: [Join #steampipe on Slack →](https://turbot.com/community/join)
