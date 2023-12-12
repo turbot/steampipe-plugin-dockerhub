@@ -2,25 +2,12 @@ package dockerhub
 
 import (
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/schema"
 )
 
 type dockerHubConfig struct {
-	Username      *string `cty:"username"`
-	Password      *string `cty:"password"`
-	TwoFactorCode *string `cty:"two_factor_code"`
-}
-
-var ConfigSchema = map[string]*schema.Attribute{
-	"username": {
-		Type: schema.TypeString,
-	},
-	"password": {
-		Type: schema.TypeString,
-	},
-	"two_factor_code": {
-		Type: schema.TypeString,
-	},
+	Username      *string `hcl:"username"`
+	Password      *string `hcl:"password"`
+	TwoFactorCode *string `hcl:"two_factor_code"`
 }
 
 func ConfigInstance() interface{} {
