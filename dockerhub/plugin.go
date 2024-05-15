@@ -21,6 +21,12 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 		ConnectionConfigSchema: &plugin.ConnectionConfigSchema{
 			NewInstance: ConfigInstance,
 		},
+		ConnectionKeyColumns: []plugin.ConnectionKeyColumn{
+			{
+				Name:    "account_id",
+				Hydrate: getDockerHubAccountId,
+			},
+		},
 		TableMap: map[string]*plugin.Table{
 			"dockerhub_repository": tableDockerHubRepository(ctx),
 			"dockerhub_tag":        tableDockerHubTag(ctx),

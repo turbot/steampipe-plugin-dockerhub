@@ -17,7 +17,7 @@ func tableDockerHubRepository(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: listRepositories,
 		},
-		Columns: []*plugin.Column{
+		Columns: commonColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Type:        proto.ColumnType_STRING,
@@ -56,7 +56,7 @@ func tableDockerHubRepository(_ context.Context) *plugin.Table {
 				Type:        proto.ColumnType_STRING,
 				Transform:   transform.FromField("Name"),
 			},
-		},
+		}),
 	}
 }
 
