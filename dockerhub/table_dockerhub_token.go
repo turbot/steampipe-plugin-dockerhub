@@ -22,7 +22,7 @@ func tableDockerHubToken(_ context.Context) *plugin.Table {
 			KeyColumns: plugin.SingleColumn("uuid"),
 			Hydrate:    getToken,
 		},
-		Columns: []*plugin.Column{
+		Columns: commonColumns([]*plugin.Column{
 			{
 				Name:        "uuid",
 				Type:        proto.ColumnType_STRING,
@@ -85,7 +85,7 @@ func tableDockerHubToken(_ context.Context) *plugin.Table {
 				Type:        proto.ColumnType_STRING,
 				Transform:   transform.FromValue().Transform(fetchUUID),
 			},
-		},
+		}),
 	}
 }
 

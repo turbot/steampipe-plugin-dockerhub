@@ -19,7 +19,7 @@ func tableDockerHubTag(_ context.Context) *plugin.Table {
 			ParentHydrate: listRepositories,
 			Hydrate:       listTags,
 		},
-		Columns: []*plugin.Column{
+		Columns: commonColumns([]*plugin.Column{
 			{
 				Name:        "name",
 				Type:        proto.ColumnType_STRING,
@@ -68,7 +68,7 @@ func tableDockerHubTag(_ context.Context) *plugin.Table {
 				Type:        proto.ColumnType_STRING,
 				Transform:   transform.FromField("Name"),
 			},
-		},
+		}),
 	}
 }
 
