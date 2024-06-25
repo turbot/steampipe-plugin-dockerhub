@@ -24,7 +24,7 @@ func getDockerHubAccountId(ctx context.Context, d *plugin.QueryData, h *plugin.H
 	acc, err := getUserInfo(ctx, d)
 	if err != nil {
 		plugin.Logger(ctx).Error("getDockerHubAccountId", err)
-		return nil, nil
+		return nil, err
 	}
 
 	return acc.ID, nil
