@@ -18,7 +18,7 @@ func tableDockerHubUser(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: listUserInfo,
 		},
-		Columns: []*plugin.Column{
+		Columns: commonColumns([]*plugin.Column{
 			{
 				Name:        "id",
 				Type:        proto.ColumnType_STRING,
@@ -75,7 +75,7 @@ func tableDockerHubUser(_ context.Context) *plugin.Table {
 				Type:        proto.ColumnType_STRING,
 				Transform:   transform.FromField("Name"),
 			},
-		},
+		}),
 	}
 }
 
