@@ -18,8 +18,17 @@ func tableDockerHubTag(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			ParentHydrate: listRepositories,
 			Hydrate:       listTags,
+			KeyColumns: []*plugin.KeyColumn{
+				{Name: "namespace", Require: plugin.Optional, Operators: []string{"="}},
+			},
 		},
 		Columns: commonColumns([]*plugin.Column{
+			{
+				Name:        "namespace",
+				Type:        proto.ColumnType_STRING,
+				Description: "Namespace of the repository.",
+				Transform:   transform.FromQual("namespace"),
+			},
 			{
 				Name:        "name",
 				Type:        proto.ColumnType_STRING,
