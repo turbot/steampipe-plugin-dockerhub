@@ -2,6 +2,7 @@ package dockerhub
 
 import (
 	"context"
+	"github.com/docker/hub-tool/pkg/hub"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
@@ -24,7 +25,7 @@ func tableDockerHubRepository(_ context.Context) *plugin.Table {
 				Name:        "namespace",
 				Type:        proto.ColumnType_STRING,
 				Description: "Namespace of the repository.",
-				Transform:   transform.FromQual("namespace"),
+				Transform:   transform.From(fetchNamespaceFromRepository),
 			},
 			{
 				Name:        "name",
@@ -117,4 +118,10 @@ func getNamespace(ctx context.Context, d *plugin.QueryData) (string, error) {
 	}
 
 	return user.Name, nil
+}
+
+func fetchNamespaceFromRepository(_ context.Context, d *transform.TransformData) (interface{}, error) {
+	repository := d.HydrateItem.(hub.Repository)
+	namespace, _ := splitRepositoryName(repository.Name)
+	return namespace, nil
 }

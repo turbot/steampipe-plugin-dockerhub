@@ -3,10 +3,10 @@ package dockerhub
 import (
 	"context"
 	"errors"
-	"os"
-
 	"github.com/docker/hub-tool/pkg/hub"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
+	"os"
+	"strings"
 )
 
 func getClient(ctx context.Context, d *plugin.QueryData) (*hub.Client, error) {
@@ -90,4 +90,14 @@ func GetUserInfoUncached(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 	}
 
 	return user, nil
+}
+
+// split the repository name into namespace and repository name
+func splitRepositoryName(repository string) (string, string) {
+	parts := strings.Split(repository, "/")
+	if len(parts) > 1 {
+		return parts[0], parts[1]
+	}
+
+	return "", repository
 }
