@@ -11,6 +11,10 @@ DockerHub is a cloud-based registry service that allows you to link to code repo
 
 The `dockerhub_repository` table provides insights into repositories within DockerHub. As a DevOps engineer, explore repository-specific details through this table, including repository name, description, star count, pull count, and last updated date. Utilize it to uncover information about repositories, such as those with high pull counts, the most starred repositories, and recently updated repositories.
 
+## Specify a namespace
+
+The `namespace` column in the `dockerhub_repository` table represents the repository namespace. By default, the namespace is set to the name of the authenticated user. To query repositories in a different namespace (e.g. `turbot` or `library`), you can specify the namespace in the `where` clause.
+
 ## Examples
 
 ### Basic info
@@ -65,6 +69,35 @@ from
   dockerhub_repository
 where
   is_private = 1;
+```
+
+### List public repositories owned by a different account
+Explore public repositories on DockerHub which are not owned by the authenticated user and can be accessed by anyone. This query can help you get detailed information about public repositories in a specific namespace.
+
+```sql+postgres
+select
+  name,
+  pull_count,
+  star_count,
+  is_private,
+  last_updated
+from
+  dockerhub_repository
+where
+  namespace = 'turbot';
+```
+
+```sql+sqlite
+select
+  name,
+  pull_count,
+  star_count,
+  is_private,
+  last_updated
+from
+  dockerhub_repository
+where
+  namespace = 'turbot';
 ```
 
 ### List repositories with no pulls or downloads
