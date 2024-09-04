@@ -103,12 +103,8 @@ func listRepositories(ctx context.Context, d *plugin.QueryData, h *plugin.Hydrat
 func getNamespace(ctx context.Context, d *plugin.QueryData) (string, error) {
 	logger := plugin.Logger(ctx)
 
-	if d.Quals["namespace"] != nil {
-		for _, q := range d.Quals["namespace"].Quals {
-			if q.Operator == "=" {
-				return q.Value.GetStringValue(), nil
-			}
-		}
+	if d.EqualsQualString("namespace") != "" {
+		return d.EqualsQualString("namespace"), nil
 	}
 
 	user, err := getUserInfo(ctx, d)
