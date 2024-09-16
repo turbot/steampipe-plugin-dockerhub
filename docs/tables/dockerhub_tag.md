@@ -11,9 +11,9 @@ DockerHub is a cloud-based registry service that allows you to link to code repo
 
 The `dockerhub_tag` table provides insights into the tags within DockerHub repositories. As a DevOps engineer, you can explore tag-specific details through this table, including the associated DockerHub repository, the tag name, and its manifest. Utilize this table to manage and monitor your DockerHub repositories, ensuring that all tags are up-to-date and follow your organization's naming conventions.
 
-## Specify a namespace
+**Important Notes**
 
-The `namespace` column in the `dockerhub_tag` table represents the repository namespace. By default, the namespace is set to the name of the authenticated user. To query tags in a different namespace (e.g. `turbot` or `library`), you can specify the namespace in the `where` clause.
+- The `namespace` column in the `dockerhub_tag` table represents the repository namespace. By default, the namespace is set to the name of the authenticated user. To query tags in a different namespace (e.g. `turbot` or `library`), you can specify the namespace in the `where` clause.
 
 ## Examples
 
