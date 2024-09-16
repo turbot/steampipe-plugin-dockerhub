@@ -11,6 +11,10 @@ DockerHub is a cloud-based registry service that allows you to link to code repo
 
 The `dockerhub_tag` table provides insights into the tags within DockerHub repositories. As a DevOps engineer, you can explore tag-specific details through this table, including the associated DockerHub repository, the tag name, and its manifest. Utilize this table to manage and monitor your DockerHub repositories, ensuring that all tags are up-to-date and follow your organization's naming conventions.
 
+**Important Notes**
+
+- The `namespace` column in the `dockerhub_tag` table represents the repository namespace. By default, the namespace is set to the name of the authenticated user. To query tags in a different namespace (e.g. `turbot` or `library`), you can specify the namespace in the `where` clause.
+
 ## Examples
 
 ### Basic info
@@ -69,6 +73,39 @@ from
   dockerhub_tag
 where
   name like 'souravthe/test%';
+```
+
+### List tags which are from a particular repository owned by a different account
+Discover the segments that are from a specific repository, allowing you to analyze the status, last update, and size of these segments. This can be useful to get detailed information about public repositories in a specific namespace.
+
+```sql+postgres
+select
+  name,
+  status,
+  last_updater_user_name,
+  last_pushed,
+  last_pulled,
+  full_size
+from
+  dockerhub_tag
+where
+  namespace = 'turbot'
+  and name like 'turbot/steampipe:0.21%';
+```
+
+```sql+sqlite
+select
+  name,
+  status,
+  last_updater_user_name,
+  last_pushed,
+  last_pulled,
+  full_size
+from
+  dockerhub_tag
+where
+  namespace = 'turbot'
+  and name like 'turbot/steampipe:0.21%';
 ```
 
 ### List tags with no pulls or downloads

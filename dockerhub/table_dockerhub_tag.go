@@ -2,7 +2,6 @@ package dockerhub
 
 import (
 	"context"
-
 	"github.com/docker/hub-tool/pkg/hub"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
@@ -18,8 +17,17 @@ func tableDockerHubTag(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			ParentHydrate: listRepositories,
 			Hydrate:       listTags,
+			KeyColumns: []*plugin.KeyColumn{
+				{Name: "namespace", Require: plugin.Optional, Operators: []string{"="}},
+			},
 		},
 		Columns: commonColumns([]*plugin.Column{
+			{
+				Name:        "namespace",
+				Type:        proto.ColumnType_STRING,
+				Description: "Namespace of the repository.",
+				Transform:   transform.From(fetchNamespaceFromTag),
+			},
 			{
 				Name:        "name",
 				Type:        proto.ColumnType_STRING,
@@ -97,4 +105,10 @@ func listTags(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (
 	}
 
 	return nil, nil
+}
+
+func fetchNamespaceFromTag(_ context.Context, d *transform.TransformData) (interface{}, error) {
+	tag := d.HydrateItem.(hub.Tag)
+	namespace, _ := splitRepositoryName(tag.Name)
+	return namespace, nil
 }

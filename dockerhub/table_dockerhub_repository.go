@@ -2,7 +2,7 @@ package dockerhub
 
 import (
 	"context"
-
+	"github.com/docker/hub-tool/pkg/hub"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
@@ -16,8 +16,17 @@ func tableDockerHubRepository(_ context.Context) *plugin.Table {
 		Description: "Get details of all the repositories in your DockerHub.",
 		List: &plugin.ListConfig{
 			Hydrate: listRepositories,
+			KeyColumns: []*plugin.KeyColumn{
+				{Name: "namespace", Require: plugin.Optional, Operators: []string{"="}},
+			},
 		},
 		Columns: commonColumns([]*plugin.Column{
+			{
+				Name:        "namespace",
+				Type:        proto.ColumnType_STRING,
+				Description: "Namespace of the repository.",
+				Transform:   transform.From(fetchNamespaceFromRepository),
+			},
 			{
 				Name:        "name",
 				Type:        proto.ColumnType_STRING,
@@ -65,9 +74,9 @@ func tableDockerHubRepository(_ context.Context) *plugin.Table {
 func listRepositories(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (interface{}, error) {
 	logger := plugin.Logger(ctx)
 
-	user, err := getUserInfo(ctx, d)
+	// Get namespace from "Quals" if available otherwise use the authenticated user's namespace
+	namespace, err := getNamespace(ctx, d)
 	if err != nil {
-		logger.Error("dockerhub_repository.getUserInfo", "error", err)
 		return nil, err
 	}
 
@@ -78,7 +87,7 @@ func listRepositories(ctx context.Context, d *plugin.QueryData, h *plugin.Hydrat
 		return nil, err
 	}
 
-	repositories, _, err := client.GetRepositories(user.Name)
+	repositories, _, err := client.GetRepositories(namespace)
 	if err != nil {
 		logger.Error("dockerhub_repository.listRepositories", "api_error", err)
 		return nil, err
@@ -89,4 +98,26 @@ func listRepositories(ctx context.Context, d *plugin.QueryData, h *plugin.Hydrat
 	}
 
 	return nil, nil
+}
+
+func getNamespace(ctx context.Context, d *plugin.QueryData) (string, error) {
+	logger := plugin.Logger(ctx)
+
+	if d.EqualsQualString("namespace") != "" {
+		return d.EqualsQualString("namespace"), nil
+	}
+
+	user, err := getUserInfo(ctx, d)
+	if err != nil {
+		logger.Error("dockerhub_repository.getUserInfo", "error", err)
+		return "", err
+	}
+
+	return user.Name, nil
+}
+
+func fetchNamespaceFromRepository(_ context.Context, d *transform.TransformData) (interface{}, error) {
+	repository := d.HydrateItem.(hub.Repository)
+	namespace, _ := splitRepositoryName(repository.Name)
+	return namespace, nil
 }
