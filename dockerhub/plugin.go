@@ -3,8 +3,8 @@ package dockerhub
 import (
 	"context"
 
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
+	"github.com/turbot/steampipe-plugin-sdk/v6/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v6/plugin/transform"
 )
 
 const pluginName = "steampipe-plugin-dockerhub"
@@ -16,7 +16,9 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 		DefaultTransform:   transform.FromCamel().Transform(transform.NullIfZeroValue),
 		DefaultRetryConfig: &plugin.RetryConfig{ShouldRetryErrorFunc: shouldRetryError([]string{"429"})},
 		DefaultGetConfig: &plugin.GetConfig{
-			ShouldIgnoreError: isNotFoundError([]string{"resource not found"}),
+			IgnoreConfig: &plugin.IgnoreConfig{ShouldIgnoreErrorFunc: func(_ context.Context, _ *plugin.QueryData, _ *plugin.HydrateData, err error) bool {
+				return isNotFoundError([]string{"resource not found"})(err)
+			}},
 		},
 		ConnectionConfigSchema: &plugin.ConnectionConfigSchema{
 			NewInstance: ConfigInstance,
