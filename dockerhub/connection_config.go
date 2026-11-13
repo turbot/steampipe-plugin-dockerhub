@@ -1,7 +1,7 @@
 package dockerhub
 
 import (
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v6/plugin"
 )
 
 type dockerHubConfig struct {
@@ -16,9 +16,9 @@ func ConfigInstance() interface{} {
 
 // GetConfig :: retrieve and cast connection config from query data
 func GetConfig(connection *plugin.Connection) dockerHubConfig {
-	if connection == nil || connection.Config == nil {
+	if connection == nil || connection.GetConfig() == nil {
 		return dockerHubConfig{}
 	}
-	config, _ := connection.Config.(dockerHubConfig)
+	config, _ := connection.GetConfig().(dockerHubConfig)
 	return config
 }

@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"github.com/docker/hub-tool/pkg/hub"
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v6/plugin"
 	"os"
 	"strings"
 )
